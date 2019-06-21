@@ -1,13 +1,30 @@
-var express = require('express');
-var app = express();
+require('dotenv').config();
+const express = require('express');
+const axios = require('axios');
+const app = express();
 
-// this adds some logging to each request
+app.set('view engine', 'ejs');
+
 app.use(require('morgan')('dev'));
+app.use(express.static(__dirname + "/static"));
 
-app.get('/', function(req, res) {
-    res.send('Hello Backend!');
+app.get('/', function(req, res){
+    res.render('index');
 });
 
-var server = app.listen(process.env.PORT || 3000);
+app.get('/results', function(req, res){
+    axios.get(`http://www.omdbapi.com/?s=${req.query.search}&apikey=${process.env.API_KEY}`)
+        .then(function(result){
+            res.render('movies', {movies: result.data.Search});
+        });
+});
 
-module.exports = server;
+app.get('/movies/:movieid', function(req, res){
+    axios.get(`http://www.omdbapi.com/?i=${req.params.movieid}&apikey=${process.env.API_KEY}`)
+    .then(function(result){
+        res.render('movie', {movie: result.data});
+    });
+})
+
+app.listen(process.env.PORT);
+

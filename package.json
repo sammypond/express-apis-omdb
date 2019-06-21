@@ -18,7 +18,20 @@
     "eslint-plugin-react": "^5.1.1"
   },
   "dependencies": {
-    "express": "^4.13.4",
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
     "morgan": "^1.7.0"
-  }
+  },
+  "description": "We'll be creating an app that connects to [OMDB](http://www.omdbapi.com), a public movie API.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammypond/express-apis-omdb.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/sammypond/express-apis-omdb/issues"
+  },
+  "homepage": "https://github.com/sammypond/express-apis-omdb#readme"
 }
